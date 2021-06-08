@@ -1,0 +1,28 @@
+package model;
+
+import controller.Controller;
+import javafx.animation.TranslateTransition;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import sort.AbstractSort;
+
+public class Block extends Rectangle implements Comparable<Block> {
+    public Block() {}
+
+    public Block(double width, double height) {
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setFill(AbstractSort.DEFAULT_COLOR);
+    }
+
+    public TranslateTransition moveBlock(double distanceVariation) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(Controller.SPEED), this);
+        transition.setByX(distanceVariation);
+        return transition;
+    }
+
+    @Override
+    public int compareTo(Block o) {
+        return (int) (this.getHeight() - o.getHeight());
+    }
+}
